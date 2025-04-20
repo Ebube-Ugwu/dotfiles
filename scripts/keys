@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+pgrep key-mon > /dev/null && exec pkill key-mon && exit
+
+key-mon --theme=oblivion --larger --backgroundless & > /dev/null
+

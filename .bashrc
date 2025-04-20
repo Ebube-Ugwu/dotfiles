@@ -89,7 +89,7 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll="ls -alF"
 alias la='ls -A'
 alias l='ls -CF'
 alias bat="/home/linuxbrew/.linuxbrew/bin/bat"
@@ -104,6 +104,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR="vim"
 export DOTFILES="$HOME/dotfiles"
 export SCRATCHPAD="$HOME/scratchpad"
+export HOSTNAME="Nezuko"
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 #uu~/.bash_aliases, instead of adding them here directly.
@@ -125,10 +126,8 @@ alias sb="source $HOME/.bashrc"
 #       edit i3 config
 alias ei3="vim $HOME/.config/i3/config"
 
+# open scratch file to try tests or write stuff
 alias scratchpad="vim $SCRATCHPAD"
-#       display keys on screen for screencasts
-alias keymon="key-mon --theme=oblivion --larger --backgroundless &"
-alias killkeys="pkill key-mon"
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -173,7 +172,7 @@ linkDotFile() {
      return 1
    fi
    ln -s "$DOTFILES/$target" "$HOME/$link"
-   echo "successfully! $HOME/$link ==> $DOTFILES/$target"
+   echo "successful! $HOME/$link ==> $DOTFILES/$target"
  }
 
 commitDotFiles() {
