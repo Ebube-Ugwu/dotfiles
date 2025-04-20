@@ -3,6 +3,7 @@
 commitdotfiles() {
 pushd $DOTFILES
 git add nvim wezterm
+git add .submodules nvim wezterm
 git commit -am "update dotfiles $(date)"
 git push || echo "push failed..check internet connection"
 popd
