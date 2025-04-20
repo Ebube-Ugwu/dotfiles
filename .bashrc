@@ -99,7 +99,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
-#
 #uu~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
@@ -118,6 +117,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# enable vi mode in bash
+set -o vi
+
+# enable linuxbrew command
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 xmodmap -e "keycode 66 = Control_L"
 
@@ -125,8 +128,33 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export XDG_CONFIG_HOME="~/.config"
+# my environment variables
+export XDG_CONFIG_HOME="$HOME/.config"
+export EDITOR="vim"
+export DOTFILES="$HOME/dotfiles"
 
-set -o vi
 
+# my shell functions
+commitDotFiles() {
+    pushd $DOTFILES
+    git add .
+    git commit -m "update dotfiles $(date)"
+    git push
+    popd
+}
+startMongo() {
+    sudo systemctl start mongod
+    sudo systemctl enable mongod
+}
 
+addToPath() {
+    if [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$PATH:$1
+    fi
+}
+
+addToPathFront() {
+    if [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$1:$PATH
+    fi
+}
