@@ -106,6 +106,18 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# my alias definitions
+alias xsc="xclip -selection clipboard"
+alias killBT="rfkill block bluetooth"
+alias unKillBT="rfkill unblock bluetooth"
+#       source, and open bashrc easily
+alias cb="cat $HOME/.bashrc"
+alias eb="vim $HOME/.bashrc"
+alias sb="source $HOME/.bashrc"
+
+#       display keys on screen for screencasts
+alias display_keys="screenkey -s large --scr 1 -p bottom --geometry 510x300+1412+850";
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -135,6 +147,22 @@ export DOTFILES="$HOME/dotfiles"
 
 
 # my shell functions
+linkDotFile() {
+    read -p "dotfile target (e.g: nvm or .bashrc): " target
+    read -p "link name (e.g .config/nvim or .vimrc): " link
+
+   if [[ -e "$HOME/$link" ]]; then
+     if [[ -s "$HOME/$link" ]]; then
+       echo "link already exists"
+       return 1;
+       fi
+       echo "file already exists"
+       return 1;
+   fi
+    ln -s "$HOME/$DOTFILES/$target" "$HOME/$link"
+    return "successfully! $HOME/$link ==> $HOME/$DOTFILES/$target"
+}
+
 commitDotFiles() {
     pushd $DOTFILES
     git add .
