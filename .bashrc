@@ -122,9 +122,13 @@ alias cb="cat $HOME/.bashrc"
 alias eb="vim $HOME/.bashrc"
 alias sb="source $HOME/.bashrc"
 
+#       edit i3 config
+alias ei3="vim $HOME/.config/i3/config"
+
 alias scratchpad="vim $SCRATCHPAD"
 #       display keys on screen for screencasts
-alias display_keys="screenkey -s large --scr 1 -p bottom --geometry 510x300+1412+850";
+alias keymon="key-mon --theme=oblivion --larger --backgroundless &"
+alias killkeys="pkill key-mon"
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -199,4 +203,14 @@ addToPathFront() {
 scratch() {
   read -p "runtime? " runtime
   $runtime $SCRATCHPAD
+}
+
+clone() {
+  read -p "username? " username
+  read -p "repo? " repo
+  read -p "destination? " destination
+  if [[ $destination == "" ]]; then
+    destination="$HOME/Downloads/$repo"
+  fi
+  git clone "https://github.com/$username/$repo" $destination
 }

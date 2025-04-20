@@ -195,7 +195,6 @@ bar {
 }
 
 # Background image
-exec feh $HOME/Downloads/latom.jpg
 
 exec_always --no-startup-id setxkbmap -layout "us"
 
@@ -207,8 +206,15 @@ force_display_urgency_hint 600
 # assign [class="Firefox"]  2
 # assign [class="wezterm"]  1
 
-exec --no-startup-id firefox
 exec --no-startup-id wezterm
+exec --no-startup-id firefox
+exec feh $HOME/Downloads/latom.jpg
 
-# change default workspace layout from tabbed to stacked
-workspace_layout stacking
+# change default workspace layout to tabbed
+workspace_layout tabbed
+
+# focus on wezterm with mod + t
+bindsym $mod+t [class="org.wezfurlong.wezter"] focus 
+
+
+exec --no-startup-id eval $(dbus-launch --sh-syntax)
