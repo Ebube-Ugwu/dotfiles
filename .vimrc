@@ -164,6 +164,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'dense-analysis/ale'
     Plug 'rafi/awesome-vim-colorschemes'
     Plug 'mattn/emmet-vim'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-sensible'
+    Plug 'tpope/vim-obsession'
+    Plug 'tpope/vim-surround'
     if has('nvim-0.8')
       Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
       Plug 'neoclide/coc.nvim', {'branch': 'release'}
