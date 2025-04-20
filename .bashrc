@@ -1,6 +1,7 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
+# 
 
 # If not running interactively, don't do anything
 case $- in
@@ -97,6 +98,12 @@ alias bat="/home/linuxbrew/.linuxbrew/bin/bat"
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+
+# MY ENVIRONMENT VARIABLES
+export XDG_CONFIG_HOME="$HOME/.config"
+export EDITOR="vim"
+export DOTFILES="$HOME/dotfiles"
+export SCRATCHPAD="$HOME/scratchpad"
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 #uu~/.bash_aliases, instead of adding them here directly.
@@ -115,6 +122,7 @@ alias cb="cat $HOME/.bashrc"
 alias eb="vim $HOME/.bashrc"
 alias sb="source $HOME/.bashrc"
 
+alias scratchpad="vim $SCRATCHPAD"
 #       display keys on screen for screencasts
 alias display_keys="screenkey -s large --scr 1 -p bottom --geometry 510x300+1412+850";
 
@@ -140,49 +148,55 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# my environment variables
-export XDG_CONFIG_HOME="$HOME/.config"
-export EDITOR="vim"
-export DOTFILES="$HOME/dotfiles"
 
 
 # my shell functions
 linkDotFile() {
     read -p "dotfile target (e.g: nvm or .bashrc): " target
+    if [[ ! -f "$DOTFILES/$target" ]]; then
+      echo "target file $target does not exists"
+      return 1
+    fi
     read -p "link name (e.g .config/nvim or .vimrc): " link
 
-   if [[ -e "$HOME/$link" ]]; then
+
+   if [[ -e "$HOME/.screenkey" ]]; then
      if [[ -s "$HOME/$link" ]]; then
        echo "link already exists"
-       return 1;
-       fi
-       echo "file already exists"
-       return 1;
+       return 1
+     fi
+     echo "file already exists"
+     return 1
    fi
-    ln -s "$HOME/$DOTFILES/$target" "$HOME/$link"
-    return "successfully! $HOME/$link ==> $HOME/$DOTFILES/$target"
-}
+   ln -s "$DOTFILES/$target" "$HOME/$link"
+   echo "successfully! $HOME/$link ==> $DOTFILES/$target"
+ }
 
 commitDotFiles() {
-    pushd $DOTFILES
-    git add .
-    git commit -m "update dotfiles $(date)"
-    git push
-    popd
+  pushd $DOTFILES
+  git add .
+  git commit -m "update dotfiles $(date)"
+  git push
+  popd
 }
 startMongo() {
-    sudo systemctl start mongod
-    sudo systemctl enable mongod
+  sudo systemctl start mongod
+  sudo systemctl enable mongod
 }
 
 addToPath() {
-    if [[ "$PATH" != *"$1"* ]]; then
-        export PATH=$PATH:$1
-    fi
+  if [[ "$PATH" != *"$1"* ]]; then
+    export PATH=$PATH:$1
+  fi
 }
 
 addToPathFront() {
-    if [[ "$PATH" != *"$1"* ]]; then
-        export PATH=$1:$PATH
-    fi
+  if [[ "$PATH" != *"$1"* ]]; then
+    export PATH=$1:$PATH
+  fi
+}
+
+scratch() {
+  read -p "runtime? " runtime
+  $runtime $SCRATCHPAD
 }
