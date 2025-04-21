@@ -182,17 +182,58 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+# bar toggle, hide or show
+bindsym $mod+b bar mode toggle
+
+bindsym $mod+i bar mode invisible
+
+#if you want transparency on non-focused windows, ...
+exec_always --no-startup-id picom --config ~/.config/i3/picom.conf
+exec_always --no-startup-id nitrogen --restore
+exec_always --no-startup-id ~/.config/i3/scripts/mouse.sh
+
 bar {
-	font pango:Inconsolata 10
+   	height 25
 	position top
-	tray_output none
-	status_command ~/.i3/bumblebee-status/bumblebee-status -m nic disk:root cpu \
-		memory battery date time pasink pasource dnf \
-		-p root.path=/ time.format="%H:%M CW %V" date.format="%a, %b %d %Y" \
-		-t solarized-powerline
+    font pango:OperatorMono Nerd Font 12
+	status_command i3status
+    tray_padding 1
+    strip_workspace_numbers yes
+
+    colors {
+            separator  #1f222d
+            background #1f222d
+            statusline #81a1c1
+
+            #                   border  background text
+            focused_workspace  #1f222d #1f222d    #81a1c1
+            active_workspace   #1f222d #252936    #5e81ac
+            inactive_workspace #1f222d #1f222d    #4c566a
+            urgent_workspace   #1f222d #1f222d    #ee829f
+            binding_mode       #1f222d #81a1c1    #2e3440
+    }
 }
+
+    ##START THEMING WM
+
+    # Window color settings
+    # class                 border  backgr. text    indicator
+    client.focused          #81a1c1 #81a1c1 #ffffff #81a1c1
+    client.unfocused        #2e3440 #1f222d #888888 #1f222d
+    client.focused_inactive #2e3440 #1f222d #888888 #1f222d
+    client.placeholder      #2e3440 #1f222d #888888 #1f222d
+    client.urgent           #900000 #900000 #ffffff #900000
+
+    client.background       #242424
+
+    ##STOP THEMING WM
+
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec light -A 1 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 1 # decrease screen brightness
+
+
 
 # Background image
 

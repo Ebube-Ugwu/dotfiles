@@ -93,6 +93,7 @@ alias ll="ls -alF"
 alias la='ls -A'
 alias l='ls -CF'
 alias bat="/home/linuxbrew/.linuxbrew/bin/bat"
+alias vim=vi
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -114,17 +115,21 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# my alias definitions
+# MY ALIAS DEFINITIONS
 alias xsc="xclip -selection clipboard"
 alias killBT="rfkill block bluetooth"
 alias unKillBT="rfkill unblock bluetooth"
-#       source, and open bashrc easily
+# source, and open bashrc easily
 alias cb="cat $HOME/.bashrc"
 alias eb="vim $HOME/.bashrc"
 alias sb="source $HOME/.bashrc"
 
-#       edit i3 config
+alias cmx="chmod u+x $1"
+
+# edit i3 config
 alias ei3="vim $HOME/.config/i3/config"
+# edit tmux config
+alias etm="vim $HOME/.tmux.conf"
 
 # open scratch file to try tests or write stuff
 alias scratchpad="vim $SCRATCHPAD"

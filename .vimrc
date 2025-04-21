@@ -21,10 +21,13 @@ set expandtab " (alpine)
 set tabstop=2 " (alpine)
 
 " use case when searching
-set noignorecase
+set ignorecase
 
 " automatically write files when changing when multiple files open
 set autowrite
+
+" always yank to system register
+set clipboard=unnamedplus
 
 " relative line numbers
 set relativenumber
@@ -143,6 +146,9 @@ set laststatus=2
 " Edit/Reload vimrc configuration file
 nnoremap <Leader>ev :e $HOME/.vimrc<CR>
 nnoremap <Leader>sv :source $HOME/.vimrc<CR>
+" Open todofile
+nnoremap <Leader>td :e $HOME/TODO.md<CR>
+
 
 set ruf=%30(%=%#LineNr#%.50F\ [%{strlen(&ft)?&ft:'none'}]\ %l:%c\ %p%%%)
 
