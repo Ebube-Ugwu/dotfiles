@@ -101,6 +101,7 @@ export EDITOR="vim"
 export DOTFILES="$HOME/dotfiles"
 export SCRATCHPAD="$HOME/scratchpad"
 export HOSTNAME="Nezuko"
+export NOTES="$HOME/projects/notes"
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 #uu~/.bash_aliases, instead of adding them here directly.

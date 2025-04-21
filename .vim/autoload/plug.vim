@@ -1,0 +1,1 @@
+/home/ebube/.vim/plug.vim

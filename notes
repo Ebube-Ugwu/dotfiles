@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+ERR_FAIL=1
+
+
+if [[ -z "$NOTES" ]]; then
+  echo "the NOTES variable is not set"
+  exit $ERR_FAIL
+fi
+
+if [[ ! -d "$NOTES" ]]; then
+  echo "the NOTES directory does not exist"
+  exit $ERR_FAIL
+fi
+
+# check if in a git repo and if so fetch
+cd "$NOTES"
+git branch 2> /dev/null && git fetch 2> /dev/null || echo -e "could not fetch..\ncheck internet connection and run manually"
+sleep 2
+if [[ ! $1 == "" ]]; then
+  if [[ $1 == "-p" || $1 == "push" || $1 == "--push" || $1 || "p" ]]; then
+    cd $NOTES
+    git add . && git commit -m "add new note on $(date +%D) :)" && git push
+  fi
+fi
+# check if notes for the current year exist
+YEAR=$(date +%Y)
+if [[ ! -d "$NOTES/$YEAR" ]]; then
+  mkdir "$NOTES/$YEAR" 
+fi
+
+cd "$NOTES/$YEAR" # enter notes directory for the current year
+
+# check if notes for the current month exist
+MONTH=$(date +%m)
+if [[ ! -d "$NOTES/$YEAR/$MONTH" ]]; then
+  mkdir "$NOTES/$YEAR/$MONTH" 
+fi
+cd "$NOTES/$YEAR/$MONTH" 
+
+DAY=$(date +%d)
+if [[ ! -f "$NOTES/$YEAR/$MONTH/${DAY}.md" ]]; then
+  touch "$NOTES/$YEAR/$MONTH/${DAY}.md"
+  mkdir "$NOTES/$YEAR/$MONTH/$DAY" 
+fi
+vim "$NOTES/$YEAR/$MONTH/${DAY}.md" 
+
+

@@ -222,7 +222,7 @@ bar {
     client.unfocused        #2e3440 #1f222d #888888 #1f222d
     client.focused_inactive #2e3440 #1f222d #888888 #1f222d
     client.placeholder      #2e3440 #1f222d #888888 #1f222d
-    client.urgent           #900000 #900000 #ffffff #900000
+    client.urgent           #ff0000 #ff0000 #ffffff #ff0000
 
     client.background       #242424
 
@@ -244,7 +244,7 @@ exec_always --no-startup-id setxkbmap -layout "us"
 
 
 # delay urgency hint reset on workspace change
-force_display_urgency_hint 600
+force_display_urgency_hint 5000 ms
 
 # Auto start and place programs in defined workspaces
 # assign [class="Firefox"]  2
