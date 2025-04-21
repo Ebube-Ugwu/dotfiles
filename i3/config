@@ -233,8 +233,11 @@ bar {
 bindsym XF86MonBrightnessUp exec light -A 1 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 1 # decrease screen brightness
 
+# window title
+for_window [all] title_window_icon no
 
-
+for_window [class=".*"] title_format "<b>%class</b>"
+for_window [class="org.wezfurlong.wezterm"] title_format "<b>wezterm</b>"
 # Background image
 
 exec_always --no-startup-id setxkbmap -layout "us"
