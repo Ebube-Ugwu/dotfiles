@@ -21,7 +21,7 @@ set expandtab " (alpine)
 set tabstop=2 " (alpine)
 
 " use case when searching
-set ignorecase
+set noignorecase
 
 " automatically write files when changing when multiple files open
 set autowrite
