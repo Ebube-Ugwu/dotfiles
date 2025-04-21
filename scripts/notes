@@ -52,10 +52,10 @@ if [[ $(basename $0) == "notes" ]]; then
     mkdir "$NOTES/$category" 
   fi
   cd "$NOTES/$category" 
-  if [[ ! -e "$NOTES/$category/$name" ]]; then
-    touch "$NOTES/$category/$name" 
+  if [[ ! -e "$NOTES/$category/${name}.md" ]]; then
+    touch "$NOTES/$category/${name}.md" 
   fi
-  vim "$NOTES/$category/$name" 
+    vi "$NOTES/$category/${name}.md" 
 fi
 
 exit $SUCCESS
