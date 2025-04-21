@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+ERR_FAIL=1
+SUCCESS=0
+
+
+if [[ -z "$NOTES" ]]; then
+  echo "the NOTES variable is not set"
+  exit $ERR_FAIL
+fi
+
+if [[ ! -d "$NOTES" ]]; then
+  echo "the NOTES directory does not exist"
+  exit $ERR_FAIL
+fi
+
+# check if in a git repo and if so fetch
+cd "$NOTES"
+git branch > /dev/null 2>&1 && git fetch > /dev/null 2>&1 || echo -e "could not fetch..\ncheck internet connection and run manually"
+sleep 2
+
+# save snapshot of notes
+if [[ ! $1 == "" ]]; then
+  if [[ $1 == "-p" || $1 == "push" || $1 == "--push" || $1 || "p" ]]; then
+    cd $NOTES
+    git add . && git commit -m "add new note on $(date +%D) :)" && git push
+    exit $SUCCESS
+  fi
+fi
+
+# daily logs
+if [[ $(basename $0) == "logs" ]]; then
+  if [[ ! -e "$NOTES/Logs" ]]; then
+    
+    echo "Logs directory does not exist"
+    exit $ERR_FAIL
+  fi
+  YEAR=$(date +%Y)
+  MONTH=$(date +%m)
+  DAY=$(date +%d)
+  if [[ ! -f "$NOTES/Logs/$YEAR-$MONTH-${DAY}.md" ]]; then
+    touch "$NOTES/Logs/$YEAR-$MONTH-${DAY}.md"
+  fi
+  vim  "$NOTES/Logs/$YEAR-$MONTH-${DAY}.md"
+fi
+
+# New not entry
+if [[ $(basename $0) == "notes" ]]; then
+  read -p "Directory/Category: " category
+  read -p "Name of note: " name
+  if [[ ! -e "$NOTES/$category" ]]; then
+    mkdir "$NOTES/$category" 
+  fi
+  cd "$NOTES/$category" 
+  if [[ ! -e "$NOTES/$category/$name" ]]; then
+    touch "$NOTES/$category/$name" 
+  fi
+  vim "$NOTES/$category/$name" 
+fi
+
+exit $SUCCESS

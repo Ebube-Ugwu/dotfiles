@@ -214,3 +214,7 @@ clone() {
   fi
   git clone "https://github.com/$username/$repo" $destination
 }
+
+mdcd() {
+  mkdir -p $1 && cd $1
+}
