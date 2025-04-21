@@ -156,7 +156,7 @@ export NVM_DIR="$HOME/.nvm"
 # my shell functions
 linkDotFile() {
     read -p "dotfile target (e.g: nvm or .bashrc): " target
-    if [[ ! -f "$DOTFILES/$target" ]]; then
+    if [[ ! -e "$DOTFILES/$target" ]]; then
       echo "target file $target does not exists"
       return 1
     fi
