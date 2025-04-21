@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+pushd $DOTFILES
+git add .
+git commit -m "update dotfiles $(date)"
+git push
+popd

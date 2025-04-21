@@ -176,13 +176,6 @@ linkDotFile() {
    echo "successful! $HOME/$link ==> $DOTFILES/$target"
  }
 
-commitDotFiles() {
-  pushd $DOTFILES
-  git add .
-  git commit -m "update dotfiles $(date)"
-  git push
-  popd
-}
 startMongo() {
   sudo systemctl start mongod
   sudo systemctl enable mongod
