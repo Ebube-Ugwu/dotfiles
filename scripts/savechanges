@@ -3,7 +3,7 @@
 commitdot || echo -e "\e[31m \n commit failed..\n check network connection \e[37m"
 notes push || echo -e "\e[31m \n commit failed..\n check network connection \e[37m"
 if [[ $? == 0 ]]; then
-echo -e "\e[32 success! \e[37m"
+echo -e "\e[32m success! \e[37m"
 fi
 
 
