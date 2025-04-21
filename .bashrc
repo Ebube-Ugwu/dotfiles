@@ -64,14 +64,6 @@ fi
 # fi
 # unset color_prompt force_color_prompt
 
-# # If this is an xterm set the title to user@host:dir
-# case "$TERM" in
-# xterm*|rxvt*)
-#     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-#     ;;
-# *)
-#     ;;
-# esac
 # Nice Rainbow Prompt
 PROMPT_COMMAND='PS1_CMD1=$(git branch --show-current 2>/dev/null)'; PS1='\[\e[38;5;201;1m\]\u\[\e[0;38;5;227m\]@\[\e[38;5;45m\]\H\[\e[0m\]|(\[\e[38;5;227m\]${PS1_CMD1}\[\e[0m\])\n\[\e[38;5;195;48;5;53m\][\w\[\e[39m\]]\[\e[0;38;5;227m\]|\[\e[38;5;38m\]\$\[\e[0m\] '
 # enable color support of ls and also add handy aliases

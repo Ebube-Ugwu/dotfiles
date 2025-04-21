@@ -2,7 +2,8 @@
 
 commitdotfiles() {
 pushd $DOTFILES
-git commit -am "update dotfiles $(date)"
+git add .
+git commit -m "update dotfiles $(date)"
 git push || echo "push failed..check internet connection"
 popd
 }
