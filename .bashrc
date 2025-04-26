@@ -102,6 +102,8 @@ export DOTFILES="$HOME/dotfiles"
 export SCRATCHPAD="$HOME/scratchpad"
 export HOSTNAME="Nezuko"
 export NOTES="$HOME/projects/notes"
+export PIPENV_VENV_IN_PROJECT="true"
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 #uu~/.bash_aliases, instead of adding them here directly.
@@ -225,9 +227,9 @@ google() {
 }
 
 ai() {
-  if [[ $1 == "-s" ]]; then
-    tgpt "please keep it short: ${*}"
+  if [[ $1 == "-l" ]]; then
+  tgpt "elaborate on: ${*}"
     return
   fi
-  tgpt "$*"
+    tgpt "please keep it short: ${*}"
 }

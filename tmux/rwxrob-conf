@@ -37,7 +37,12 @@ unbind _
 bind _ split-window -v
 
 # kill current window and all panes
-bind-key & kill-window
+bind-key Q confirm-before -p "kill window
+#{window_index} (y/n)?" kill-pane
+
+# kill pane
+unbind q
+bind-key q confirm-before -p "kill pane #{pane_index} (y/n)?" kill-pane
 
 # vi for copy mode
 setw -g mode-keys vi

@@ -177,6 +177,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
     Plug 'Raimondi/delimitMate'
+    Plug  'preservim/nerdtree'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     if has('nvim-0.8')

@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =3
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='~'
 let g:netrw_dirhist_3='/home/ebube/Downloads/rwxrob-dotfiles/install/mac'
 let g:netrw_dirhist_2='/home/ebube/dotfiles'
 let g:netrw_dirhist_1='/home/ebube/Downloads/i3wm-nord/i3'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_8='/home/ebube/.config/wezterm/config'
 let g:netrw_dirhist_7='/home/ebube/.config/wezterm'
 let g:netrw_dirhist_6='/home/ebube/.config/wezterm/colors'
 let g:netrw_dirhist_5='/home/ebube/.config/wezterm'
-let g:netrw_dirhist_4='/home/ebube/.config/wezterm/events'
