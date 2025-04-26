@@ -139,15 +139,16 @@ filetype plugin on
 "set background=dark
 
 set cinoptions+=:0
-
-" status to show always
-set laststatus=2 
-
+" MY REMAPS
 " Edit/Reload vimrc configuration file
 nnoremap <Leader>ev :e $HOME/.vimrc<CR>
 nnoremap <Leader>sv :source $HOME/.vimrc<CR>
 " Open todofile
 nnoremap <Leader>td :e $HOME/TODO.md<CR>
+
+" save and quit
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
 
 
 set ruf=%30(%=%#LineNr#%.50F\ [%{strlen(&ft)?&ft:'none'}]\ %l:%c\ %p%%%)
@@ -173,7 +174,11 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-sensible'
     Plug 'tpope/vim-obsession'
+    Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
+    Plug 'Raimondi/delimitMate'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
     if has('nvim-0.8')
       Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
       Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -187,172 +192,185 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     else
       Plug 'dahu/vim-asciidoc'
     endif
-  call plug#end()
+    call plug#end()
 
-  let g:vim_asciidoc_initial_foldlevel=1
+    let g:vim_asciidoc_initial_foldlevel=1
 
-  set signcolumn=yes
-  let g:ale_set_signs = 1
-  let g:ale_sign_info = '✨'
-  let g:ale_sign_error = '🔥'
-  let g:ale_sign_warning = '❗️'
-  let g:ale_sign_hint = '💡'
+    set signcolumn=yes
+    let g:ale_set_signs = 1
+    let g:ale_sign_info = '✨'
+    let g:ale_sign_error = '🔥'
+    let g:ale_sign_warning = '❗️'
+    let g:ale_sign_hint = '💡'
 
-  " perl stuff needs cpan install (brew also works):
-  "   Perl::Tidy
-  "   Perl::Critic
+    " perl stuff needs cpan install (brew also works):
+    "   Perl::Tidy
+    "   Perl::Critic
 
-  let g:ale_linters = {
-        \'go': ['gometalinter','gofmt','gobuild'],
-        \'perl': ['perl','perlcritic'],
-        \}
-  let g:ale_linter_aliases = {'bash': 'sh'}
-  let g:ale_perl_perlcritic_options = '--severity 3'
+    let g:ale_linters = {
+          \'go': ['gometalinter','gofmt','gobuild'],
+          \'perl': ['perl','perlcritic'],
+          \}
+    let g:ale_linter_aliases = {'bash': 'sh'}
+    let g:ale_perl_perlcritic_options = '--severity 3'
 
-  let g:ale_fixers = {
-        \'sh': ['shfmt'],
-        \'bash': ['shfmt'],
-        \'perl': ['perltidy'],
-        \}
-  let g:ale_fix_on_save = 1
-  let g:ale_perl_perltidy_options = '-b'
+    let g:ale_fixers = {
+          \'sh': ['shfmt'],
+          \'bash': ['shfmt'],
+          \'perl': ['perltidy'],
+          \}
+    let g:ale_fix_on_save = 1
+    let g:ale_perl_perltidy_options = '-b'
 
-  " pandoc
-  let g:pandoc#formatting#mode = 'h' " A'
-  let g:pandoc#formatting#textwidth = 72
+    " pandoc
+    let g:pandoc#formatting#mode = 'h' " A'
+    let g:pandoc#formatting#textwidth = 72
 
-  " golang
-  let g:go_fmt_fail_silently = 0
-  "let g:go_fmt_options = '-s'
-  let g:go_fmt_command = 'goimports'
-  let g:go_fmt_autosave = 1
-  let g:go_gopls_enabled = 1
-  let g:go_highlight_types = 1
-  let g:go_highlight_fields = 1
-  let g:go_highlight_functions = 1
-  let g:go_highlight_function_calls = 1
-  let g:go_highlight_operators = 1
-  let g:go_highlight_extra_types = 1
-  let g:go_highlight_variable_declarations = 1
-  let g:go_highlight_variable_assignments = 1
-  let g:go_highlight_build_constraints = 1
-  let g:go_highlight_diagnostic_errors = 1
-  let g:go_highlight_diagnostic_warnings = 1
-  let g:go_code_completion_enabled = 1
-  let g:go_auto_sameids = 0
-  set updatetime=100
+    " golang
+    let g:go_fmt_fail_silently = 0
+    "let g:go_fmt_options = '-s'
+    let g:go_fmt_command = 'goimports'
+    let g:go_fmt_autosave = 1
+    let g:go_gopls_enabled = 1
+    let g:go_highlight_types = 1
+    let g:go_highlight_fields = 1
+    let g:go_highlight_functions = 1
+    let g:go_highlight_function_calls = 1
+    let g:go_highlight_operators = 1
+    let g:go_highlight_extra_types = 1
+    let g:go_highlight_variable_declarations = 1
+    let g:go_highlight_variable_assignments = 1
+    let g:go_highlight_build_constraints = 1
+    let g:go_highlight_diagnostic_errors = 1
+    let g:go_highlight_diagnostic_warnings = 1
+    let g:go_code_completion_enabled = 1
+    let g:go_auto_sameids = 0
+    set updatetime=100
 
 
-  if !exists('g:colors_name') || g:colors_name !=# 'gruvbox-material'
-    try
-      colorscheme gruvbox-material
-    catch /^Vim\%((\a\+)\)\=:E185/
-      colorscheme desert
-    endtry
-  endif
+    if !exists('g:colors_name') || g:colors_name !=# 'gruvbox-material'
+      try
+        colorscheme gruvbox-material
+      catch /^Vim\%((\a\+)\)\=:E185/
+        colorscheme desert
+      endtry
+    endif
 
 else
   autocmd vimleavepre *.go !gofmt -w % " backup if fatih fails
-endif
+  endif
 
-" force loclist to always close when buffer does (affects vim-go, etc.)
-augroup CloseLoclistWindowGroup
-  autocmd!
-  autocmd QuitPre * if empty(&buftype) | lclose | endif
-augroup END
+  " force loclist to always close when buffer does (affects vim-go, etc.)
+  augroup CloseLoclistWindowGroup
+    autocmd!
+    autocmd QuitPre * if empty(&buftype) | lclose | endif
+  augroup END
 
-autocmd BufWritePost *.{md,adoc} silent !toemoji %
+  autocmd BufWritePost *.{md,adoc} silent !toemoji %
 
-" make Y consistent with D and C (yank til end)
-map Y y$
+  " make Y consistent with D and C (yank til end)
+  map Y y$
 
-" better command-line completion
-set wildmenu
+  " better command-line completion
+  set wildmenu
 
-" better cursor movement
-"set virtualedit=all
-set wrap
+  " better cursor movement
+  "set virtualedit=all
+  set wrap
 
-" disable search highlighting with <C-L> when refreshing screen
-nnoremap <C-L> :nohl<CR><C-L>
+  " disable search highlighting with <C-L> when refreshing screen
+  nnoremap <C-L> :nohl<CR><C-L>
 
-" enable omni-completion
-set omnifunc=syntaxcomplete#Complete
-imap <tab><tab> <c-x><c-o>
+  " enable omni-completion
+  set omnifunc=syntaxcomplete#Complete
+  imap <tab><tab> <c-x><c-o>
 
-" force some files to be specific file type
-au bufnewfile,bufRead .goreleaser set ft=yaml
-au bufnewfile,bufRead *.props set ft=jproperties
-au bufnewfile,bufRead *.ddl set ft=sql
-au bufnewfile,bufRead *.sh* set ft=sh
-au bufnewfile,bufRead *.{peg,pegn} set ft=config
-au bufnewfile,bufRead *.gotmpl set ft=go
-au bufnewfile,bufRead *.profile set filetype=sh
-au bufnewfile,bufRead *.crontab set filetype=crontab
-au bufnewfile,bufRead *ssh/config set filetype=sshconfig
-au bufnewfile,bufRead .dockerignore set filetype=gitignore
-au bufnewfile,bufRead .bashrc,.bash_profile set filetype=bash
-au bufnewfile,bufRead *gitconfig set filetype=gitconfig
-au bufnewfile,bufRead /tmp/psql.edit.* set syntax=sql
-au bufnewfile,bufRead *.go set spell spellcapcheck=0
-au bufnewfile,bufRead commands.yaml set spell
-au bufnewfile,bufRead *.{txt,md,adoc} set spell
+  " force some files to be specific file type
+  au bufnewfile,bufRead .goreleaser set ft=yaml
+  au bufnewfile,bufRead *.props set ft=jproperties
+  au bufnewfile,bufRead *.ddl set ft=sql
+  au bufnewfile,bufRead *.sh* set ft=sh
+  au bufnewfile,bufRead *.{peg,pegn} set ft=config
+  au bufnewfile,bufRead *.gotmpl set ft=go
+  au bufnewfile,bufRead *.profile set filetype=sh
+  au bufnewfile,bufRead *.crontab set filetype=crontab
+  au bufnewfile,bufRead *ssh/config set filetype=sshconfig
+  au bufnewfile,bufRead .dockerignore set filetype=gitignore
+  au bufnewfile,bufRead .bashrc,.bash_profile set filetype=bash
+  au bufnewfile,bufRead *gitconfig set filetype=gitconfig
+  au bufnewfile,bufRead /tmp/psql.edit.* set syntax=sql
+  au bufnewfile,bufRead *.go set spell spellcapcheck=0
+  au bufnewfile,bufRead commands.yaml set spell
+  au bufnewfile,bufRead *.{txt,md,adoc} set spell
 
-"fix bork bash detection
-if has("eval")  " vim-tiny detection
-fun! s:DetectBash()
-    if getline(1) == '#!/usr/bin/bash' 
-          \ || getline(1) == '#!/bin/bash'
-          \ || getline(1) == '#!/usr/bin/env bash'
+  "fix bork bash detection
+  if has("eval")  " vim-tiny detection
+    fun! s:DetectBash()
+      if getline(1) == '#!/usr/bin/bash' 
+            \ || getline(1) == '#!/bin/bash'
+            \ || getline(1) == '#!/usr/bin/env bash'
         set ft=bash
         set shiftwidth=2
-    endif
-endfun
-autocmd BufNewFile,BufRead * call s:DetectBash()
-endif
-
-" displays all the syntax rules for current position, useful
-" when writing vimscript syntax plugins
-if has("syntax")
-function! <SID>SynStack()
-  if !exists("*synstack")
-    return
+      endif
+    endfun
+    autocmd BufNewFile,BufRead * call s:DetectBash()
   endif
-    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
-endif
 
-" start at last place you were editing
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  " displays all the syntax rules for current position, useful
+  " when writing vimscript syntax plugins
+  if has("syntax")
+    function! <SID>SynStack()
+      if !exists("*synstack")
+        return
+      endif
+      echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+    endfunc
+  endif
 
-" functions keys
-map <F1> :set number!<CR> :set relativenumber!<CR>
-nmap <F2> :call <SID>SynStack()<CR>
-set pastetoggle=<F3>
-map <F4> :set list!<CR>
-map <F5> :set cursorline!<CR>
-map <F7> :set spell!<CR>
-map <F12> :set fdm=indent<CR>
+  " start at last place you were editing
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-set cursorline
+  " functions keys
+  map <F1> :set number!<CR> :set relativenumber!<CR>
+  nmap <F2> :call <SID>SynStack()<CR>
+  set pastetoggle=<F3>
+  map <F4> :set list!<CR>
+  map <F5> :set cursorline!<CR>
+  map <F7> :set spell!<CR>
+  map <F12> :set fdm=indent<CR>
+
+  set cursorline
 
 
-" disable arrow keys (vi muscle memory)
- noremap <up> :echoerr "Umm, use k instead"<CR>
- noremap <down> :echoerr "Umm, use j instead"<CR>
- noremap <left> :echoerr "Umm, use h instead"<CR>
- noremap <right> :echoerr "Umm, use l instead"<CR>
- inoremap <up> <NOP>
- inoremap <down> <NOP>
- inoremap <left> <NOP>
- inoremap <right> <NOP>
+  " disable arrow keys (vi muscle memory)
+  noremap <up> :echoerr "Umm, use k instead"<CR>
+  noremap <down> :echoerr "Umm, use j instead"<CR>
+  noremap <left> :echoerr "Umm, use h instead"<CR>
+  noremap <right> :echoerr "Umm, use l instead"<CR>
+  inoremap <up> <NOP>
+  inoremap <down> <NOP>
+  inoremap <left> <NOP>
+  inoremap <right> <NOP>
 
-" better page down and page up
-noremap <C-n> <C-d>
-noremap <C-p> <C-b>
+  " better page down and page up
+  noremap <C-n> <C-d>
+  noremap <C-p> <C-b>
 
-" set TMUX window name to name of file
-if exists('$TMUX')
+  " set TMUX window name to name of file
+  if exists('$TMUX')
     autocmd BufEnter * call system('tmux rename-window ' . expand('%:p:h:t') . '/' . expand('%:t'))
-endif
+  endif
 
+  " set cursor change depending on mode type (only on supported terminal
+  " emulators
+
+  if &term =~ "xterm\\|rxvt\\|wezterm\\|alacritty"
+    let &t_SI = "\e[6 q" " Insert mode: I-beam
+    let &t_EI = "\e[2 q" " Normal mode: block
+    let &t_SR = "\e[4 q"  " Replace mode: underline
+  endif
+
+" vim airline themes and config
+let g:airline_theme='simple'
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 1

@@ -65,13 +65,13 @@ fi
 # unset color_prompt force_color_prompt
 
 # Nice Rainbow Prompt
-PROMPT_COMMAND='PS1_CMD1=$(git branch --show-current 2>/dev/null)'; PS1='\[\e[38;5;201;1m\]\u\[\e[0;38;5;227m\]@\[\e[38;5;45m\]\H\[\e[0m\](\[\e[38;5;227m\]${PS1_CMD1}\[\e[0m\])\n\[\e[38;5;195;48;5;53m\][\w\[\e[39m\]]\[\e[0;38;5;227m\]|\[\e[38;5;38m\]\$\[\e[0m\] '
+PROMPT_COMMAND='PS1_CMD1=$(git branch --show-current 2>/dev/null)'; PS1='\[\e[38;5;201;1m\]\u\[\e[0;38;5;227m\]@\[\e[38;5;45m\]\H\[\e[0m\](\[\e[38;5;227m\]${PS1_CMD1}\[\e[0m\])\n\[\e[38;5;195;48;5;53m\][\w\[\e[39m\]]\[\e[38;5;201;1m\]\[\e[0;38;5;227m\]|\[\e[38;5;38m\]\$\[\e[0m\] '
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -119,6 +119,7 @@ alias unKillBT="rfkill unblock bluetooth"
 alias cb="cat $HOME/.bashrc"
 alias eb="vim $HOME/.bashrc"
 alias sb="source $HOME/.bashrc"
+alias ?="google"
 
 alias cmx="chmod u+x $1"
 
@@ -143,6 +144,9 @@ fi
 
 # enable vi mode in bash
 set -o vi
+
+# apply .inputrc settings
+bind -f "$HOME/.inputrc"
 
 # enable linuxbrew command
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -210,4 +214,20 @@ clone() {
 
 mdcd() {
   mkdir -p $1 && cd $1
+}
+
+vic() {
+  vi $(which $1)
+}
+
+google() {
+  lynx -vikeys https://duckduckgo.com?q="$*"
+}
+
+ai() {
+  if [[ $1 == "-s" ]]; then
+    tgpt "please keep it short: ${*}"
+    return
+  fi
+  tgpt "$*"
 }

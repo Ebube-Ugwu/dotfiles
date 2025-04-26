@@ -1,0 +1,7 @@
+# Enable vi mode
+set editing-mode vi
+
+# Make Cursor block in normal mode but bar in insertmode
+set show-mode-in-prompt on
+set vi-cmd-mode-string "\1\e[2 q\2"
+set vi-ins-mode-string "\1\e[6 q\2"
