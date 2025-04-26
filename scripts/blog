@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# cd into the blogs dir
+# blog shows a list of commands same as blog help
+# blog new : it asks for the title and openes it up in vim
+# blog project: opens up a new project blog post in vim
+# blog post commits and pushes and copies it into the website directory
+#   and pushes ( it outputs any error and tells you about it)
+
+if [[ $1 == "" || $1 == "help" || ]]

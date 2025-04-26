@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# call chtsht it shows a list or commands
+# once you enter one it checks if it has beendownloaded
+# and if so it opens it with lynx
+# if not it curls it and opens it with lynx
+
+selected=$(cat $HOME/.chtsht-entries | fzf)
+
+if [[ -z $selected ]]; then
+  exit 0
+fi
+
+echo $selected
+DIR="$HOME/.cheatsheets"
+if [[ ! -e $DIR ]]; then
+  mkdir "$DIR"
+fi
+
+cd $DIR
+if [[ ! -e "${selected}.html" ]]; then
+  curl "https://devhints.io/$selected" -o ${selected}.html || echo -e "could not download cheat sheet for $selected \n"
+fi
+
+if [[ -f "${selected}.html" ]]; then
+  lynx "${selected}.html" -vikeys
+fi
+exit 0
