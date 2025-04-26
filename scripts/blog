@@ -1,10 +1,82 @@
 #!/usr/bin/env bash
 
-# cd into the blogs dir
 # blog shows a list of commands same as blog help
 # blog new : it asks for the title and openes it up in vim
 # blog project: opens up a new project blog post in vim
-# blog post commits and pushes and copies it into the website directory
+# blog publish commits and pushes and copies it into the website directory
 #   and pushes ( it outputs any error and tells you about it)
 
-if [[ $1 == "" || $1 == "help" || ]]
+ERR=1
+SUCCESS=0
+
+help() {
+  echo "$(basename $0): a script to automate blogging with hugo"
+  echo "commands available: "
+  echo -e "\t help: \t shows the help document"
+  echo -e "\t new: \t create a new blog post"
+  echo -e "\t project: \t create a new project post"
+  echo -e "\t publish: \t save and publish changes"
+}
+
+new() {
+  read -p "blog post title? " title
+  if [[ -z $title ]]; then
+    exit $ERR
+  fi
+  title=$(echo $title | tr ' ' '-')
+  cd "$SITE_HOME/raw"
+  if [[ ! -e "content/blog/${title}.md" ]]; then
+    hugo new "blog/${title}.md"
+  fi
+  vim "content/blog/${title}.md"
+}
+
+project() {
+  read -p "project post title? " title
+  if [[ -z $title ]]; then
+    exit $ERR
+  fi
+  title=$(echo $title | tr ' ' '-')
+  cd "$SITE_HOME/raw"
+  if [[ ! -e "content/project/${title}.md" ]]; then
+    hugo new "project/${title}.md"
+  fi
+  vim "content/project/${title}.md"
+}
+
+publish() {
+  cd "$SITE_HOME/raw"
+  hugo --cleanDestinationDir
+  git add . && git commit -m "save changes"
+  rm -rf "$SITE_HOME/ebubeugwu.com/*"
+  cp -r "public/"*  "$SITE_HOME/ebubeugwu.com/"
+  git push
+  cd "$SITE_HOME/ebubeugwu.com"
+  git add . && git commit -m "save changes"
+  git push
+}
+
+options=("help" "new" "project" "publish")
+
+# show help document
+if [[ $1 == "" || $1 == "help" || ! ${options[@]} =~ "$1" ]]; then
+  help
+  exit $SUCCESS
+fi
+
+# new blog post
+if [[ $1 == "new" ]]; then
+  new
+fi
+
+# new project post
+if [[ $1 == "project" ]]; then
+  project
+fi
+
+# publish
+if [[ $1 == "publish" ]]; then
+  publish
+fi
+
+exit
