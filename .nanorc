@@ -1,0 +1,66 @@
+## ===== General Behavior =====
+
+set linenumbers # Show line numbers on the left set constantshow # Show the cursor position constantly set softwrap # Wrap long lines at word boundaries set tabsize 4 # Set tab size to 4 spaces set autoindent # Maintain indent on new lines set mouse # Enable mouse support 
+set smooth # Smooth scrolling 
+set suspend # Allow nano to be suspended with Ctrl+Z set indicator # Show the scrollbar indicator on the right set whitespace # Highlight trailing whitespace 
+set bracketmatching # Highlight matching brackets 
+set morespace # Use the blank line below the title bar for messages
+
+## ===== Backup and Save Behavior =====
+
+set backup # Create backup files with a ~ suffix set locking # Enable file locking set tempfile # Write changes directly to the file (auto-save)
+
+## ===== Search Behavior =====
+
+set caseSensitive # Make search case sensitive by default 
+set historylog # Keep a search and replace history
+
+## ===== UI & Navigation =====
+
+set linenumbers # Show line numbers set constantshow # Show cursor position (line, column) set indicator # Show scroll bar on the right set softwrap # Wrap long lines at word boundaries set morespace # Use the bottom row for messages set titlecolor white,blue s statuscolor brightwhite,magenta
+set numbercolor brightcyan 
+set functioncolor red set keycolor green 
+set cursorcolor black,green # Highlights the cursor location
+
+## ===== Editing Behavior =====
+
+set tabsize 4 # Set tab size to 4 set tabstospaces # Use spaces instead of tabs 
+set autoindent # Maintain indent from previous line 
+set brackets # Match (), [], {}
+set matchbrackets # Deprecated alias, for compatibility 
+set mouse # Enable mouse support 
+set smarthome # Home goes to first non-whitespace set whitespace "trailing" # Highlight trailing spaces set zap # Cutting text 
+set nowrap # Don't hard-wrap long lines set smooth # Smooth scrolling
+
+## ===== File Handling =====
+
+set backup # Create backups with ~
+set tempfile # Write directly to file (autosave-like)
+set locking # Enable file locking 
+set nowrap # Prevent wrapping (for code)
+
+## ===== Search =====
+
+set caseSensitive # Case-sensitive search 
+set historylog # Remember search/replace history 
+set quickblank # Clear old prompts from status bar
+
+## ===== Spelling =====
+
+#set speller "aspell -x -c" # Enable spell checking (uncomment if you use aspell or spell)
+
+## ===== Include Syntax Highlighting =====
+
+## ===== Spelling =====
+
+# Uncomment and set this to use spell checking (requires spell or aspell) set speller "aspell -c"
+
+## ===== Include Syntax Highlighting Files =====
+
+## ===== Optional: Enable Color UI =====
+
+set titlecolor white,blue 
+set statuscolor brightwhite,magenta 
+set numbercolor brightcyan 
+set keycolor green 
+set functioncolor red

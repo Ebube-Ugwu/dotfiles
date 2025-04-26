@@ -102,6 +102,7 @@ export DOTFILES="$HOME/dotfiles"
 export SCRATCHPAD="$HOME/scratchpad"
 export HOSTNAME="Nezuko"
 export NOTES="$HOME/projects/notes"
+export SITE_HOME="$HOME/projects/personal-site"
 export PIPENV_VENV_IN_PROJECT="true"
 
 # Alias definitions.
@@ -208,6 +209,9 @@ clone() {
   read -p "username? " username
   read -p "repo? " repo
   read -p "destination? " destination
+  if [[ $username == "" ]]; then
+    username="Ebube-Ugwu"
+  fi
   if [[ $destination == "" ]]; then
     destination="$HOME/Downloads/$repo"
   fi
