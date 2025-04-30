@@ -29,7 +29,7 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork --image=~/Downloads/latom.jpg
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork --image=/home/ebube/Downloads/latom.png
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -250,9 +250,10 @@ force_display_urgency_hint 5000 ms
 # assign [class="Firefox"]  2
 # assign [class="wezterm"]  1
 
+exec --no-startup-id picom --experimental-backends
 exec --no-startup-id wezterm
-exec --no-startup-id firefox
-exec feh $HOME/Downloads/latom.jpg
+exec --no-startup-id emacs --daemon
+exec --no-startup-id feh --bg-scale ~/Downloads/latom.jpg
 
 # change default workspace layout to tabbed
 workspace_layout tabbed

@@ -126,6 +126,9 @@ alias ?="google"
 
 alias cmx="chmod u+x $1"
 
+# btop
+alias btop="btop --utf-force"
+
 # edit i3 config
 alias ei3="vim $HOME/.config/i3/config"
 # edit tmux config
@@ -158,7 +161,8 @@ xmodmap -e "keycode 66 = Control_L"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
+# for picom forks
+export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
 
 
 # my shell functions
