@@ -9,7 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -29,7 +29,7 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork --image=/home/ebube/Downloads/latom.png
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --no-fork -c 338883 -i ~/Downloads/latom.png  -e -p win -b -t -f
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -191,28 +191,35 @@ bindsym $mod+i bar mode invisible
 exec_always --no-startup-id picom --config ~/.config/i3/picom.conf
 exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id ~/.config/i3/scripts/mouse.sh
-
 bar {
-   	height 25
+ 	font pango:Inconsolata 10
 	position top
-    font pango:OperatorMono Nerd Font 12
-	status_command i3status
-    tray_padding 1
-    strip_workspace_numbers yes
-
-    colors {
-            separator  #1f222d
-            background #1f222d
-            statusline #81a1c1
-
-            #                   border  background text
-            focused_workspace  #1f222d #1f222d    #81a1c1
-            active_workspace   #1f222d #252936    #5e81ac
-            inactive_workspace #1f222d #1f222d    #4c566a
-            urgent_workspace   #1f222d #1f222d    #ee829f
-            binding_mode       #1f222d #81a1c1    #2e3440
-    }
+	tray_output none
+  status_command bumblebee-status  -m battery bluetooth memory cpu \
+  pomodoro brightness publicip -t iceberg-rainbow
 }
+  # datetime memory pomodoro title -t dracula-powerline
+# bar {
+#    	height 25
+# 	position top
+#     font pango:OperatorMono Nerd Font 12
+# 	status_command i3status
+#     tray_padding 1
+#     strip_workspace_numbers yes
+
+#     colors {
+#             separator  #1f222d
+#             background #1f222d
+#             statusline #81a1c1
+
+#             #                   border  background text
+#             focused_workspace  #1f222d #1f222d    #81a1c1
+#             active_workspace   #1f222d #252936    #5e81ac
+#             inactive_workspace #1f222d #1f222d    #4c566a
+#             urgent_workspace   #1f222d #1f222d    #ee829f
+#             binding_mode       #1f222d #81a1c1    #2e3440
+#     }
+# }
 
     ##START THEMING WM
 
@@ -253,8 +260,9 @@ force_display_urgency_hint 5000 ms
 exec --no-startup-id picom --experimental-backends
 exec --no-startup-id wezterm
 exec --no-startup-id emacs --daemon
-exec --no-startup-id feh --bg-scale ~/Downloads/latom.jpg
+exec --no-startup-id feh --bg-scale ~/Downloads/Alpha-side.jpg
 
+gaps inner 10
 # change default workspace layout to tabbed
 workspace_layout tabbed
 

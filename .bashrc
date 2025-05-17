@@ -65,7 +65,7 @@ fi
 # unset color_prompt force_color_prompt
 
 # Nice Rainbow Prompt
-PROMPT_COMMAND='PS1_CMD1=$(git branch --show-current 2>/dev/null)'; PS1='\[\e[38;5;201;1m\]\u\[\e[0;38;5;227m\]@\[\e[38;5;45m\]\H\[\e[0m\](\[\e[38;5;227m\]${PS1_CMD1}\[\e[0m\])\n\[\e[38;5;195;48;5;53m\][\w\[\e[39m\]]\[\e[38;5;201;1m\]\[\e[0;38;5;227m\]|\[\e[38;5;38m\]\$\[\e[0m\] '
+PROMPT_COMMAND='PS1_CMD1=$(git branch --show-current 2>/dev/null)'; PS1='\[\e[38;5;195;48;5;53m\][\w\[\e[39m\]]\[\e[38;5;201;1m\]\n\[\e[0;38;5;201;1m\]\u\[\e[0;38;5;227m\]@\[\e[38;5;45m\]\H\[\e[0m\](\[\e[38;5;227m\]${PS1_CMD1}\[\e[0m\])\e[0;38;5;227m\]|\[\e[38;5;38m\]\$\[\e[0m\] '
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -123,11 +123,14 @@ alias cb="cat $HOME/.bashrc"
 alias eb="vim $HOME/.bashrc"
 alias sb="source $HOME/.bashrc"
 alias ?="google"
-
 alias cmx="chmod u+x $1"
-
+# apt
+alias install="sudo apt install $1"
+alias update="sudo apt update"
 # btop
 alias btop="btop --utf-force"
+# bluelight filter
+alias bluelight="redshift -P -O 3400K"
 
 # edit i3 config
 alias ei3="vim $HOME/.config/i3/config"
@@ -150,6 +153,7 @@ fi
 
 # enable vi mode in bash
 set -o vi
+
 
 # apply .inputrc settings
 bind -f "$HOME/.inputrc"
@@ -241,3 +245,9 @@ ai() {
   fi
     tgpt "please keep it short: ${*}"
 }
+
+hist() {
+  command=$( history | fzf | awk '{$1 = ""; print $0}')
+  eval "$command"
+}
+

@@ -180,6 +180,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug  'preservim/nerdtree'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
+    Plug 'mhinz/vim-startify'
     if has('nvim-0.8')
       Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
       Plug 'neoclide/coc.nvim', {'branch': 'release'}
