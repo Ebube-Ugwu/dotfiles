@@ -136,13 +136,17 @@ set ttyfast
 filetype plugin on
 
 " high contrast for streaming, etc.
-"set background=dark
+set background=dark
 
 set cinoptions+=:0
+
+" --------------------------------
 " MY REMAPS
+" --------------------------------
 " Edit/Reload vimrc configuration file
 nnoremap <Leader>ev :e $HOME/.vimrc<CR>
 nnoremap <Leader>sv :source $HOME/.vimrc<CR>
+
 " Open todofile
 nnoremap <Leader>td :e $HOME/TODO.md<CR>
 
@@ -150,6 +154,12 @@ nnoremap <Leader>td :e $HOME/TODO.md<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 
+" open nerdtree
+nnoremap <leader>E :NERDTree<cr>
+
+" Cycle through buffers
+nnoremap <tab> :bn<cr>
+nnoremap <S-Tab> :bp<cr>
 
 set ruf=%30(%=%#LineNr#%.50F\ [%{strlen(&ft)?&ft:'none'}]\ %l:%c\ %p%%%)
 
@@ -378,4 +388,4 @@ let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 
 " vim colorsheme
-colorscheme molokai
+colorscheme gruvbox
