@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+session=$(tmux ls | perl -pe 's/:.+$//g' | perl -pe '$_ = "$. $_"' | fzf | awk '{print $2}')
+tmux kill-session -t $session

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+session=$(tmuxinator list | perl -p -e 's/ +/\n/g' | perl -pe '$_ = "$.  $_"' | fzf | awk '{ print $2 }')
+tmuxinator start $session
