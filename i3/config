@@ -86,7 +86,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+z split h
+bindsym $mod+- split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -163,10 +163,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -271,3 +271,6 @@ bindsym $mod+t [class="org.wezfurlong.wezter"] focus
 
 exec --no-startup-id eval $(dbus-launch --sh-syntax)
 
+# bluetooth
+exec --no-startup-id blueman-applet
+exec --no-startup-id dunst

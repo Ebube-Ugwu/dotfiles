@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+session=$(tmux ls | awk '{ print $1 }' | perl -p -e 's/://g' | fzf | awk '{ print $1 }')
+tmuxinator start $session
+
