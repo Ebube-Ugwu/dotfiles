@@ -97,7 +97,7 @@ bindsym $mod+f fullscreen toggle
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+Shift+s layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -183,7 +183,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # bar toggle, hide or show
-bindsym $mod+b bar mode toggle
+bindsym $mod+Shift+b bar mode toggle
 
 bindsym $mod+i bar mode invisible
 
@@ -266,8 +266,14 @@ gaps inner 10
 # change default workspace layout to tabbed
 workspace_layout tabbed
 
-# focus on wezterm with mod + t
+# focus on terminal ("wezterm")
 bindsym $mod+t [class="org.wezfurlong.wezter"] focus
+
+# focus on editor ("vs code")
+bindsym $mod+e [class="Code"] focus
+
+# focus on browser ("firefox")
+bindsym $mod+b [class="firefox"] focus
 
 exec --no-startup-id eval $(dbus-launch --sh-syntax)
 
