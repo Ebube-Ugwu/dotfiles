@@ -144,11 +144,11 @@ set cinoptions+=:0
 " MY REMAPS
 " --------------------------------
 " Edit/Reload vimrc configuration file
-nnoremap <Leader>ev :e $HOME/.vimrc<CR>
-nnoremap <Leader>sv :source $HOME/.vimrc<CR>
+nnoremap <Leader>ev :e ~/.vimrc<CR>
+nnoremap <Leader>sv :source ~/.vimrc<CR>
 
 " Open todofile
-nnoremap <Leader>td :e $HOME/TODO.md<CR>
+nnoremap <Leader>td :e ~/TODO.md<CR>
 
 " save and quit
 nnoremap <Leader>w :w<CR>
