@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-wmctrl -lx | grep -i "zed" | awk '{print $5}' | xargs -I{} wmctrl -a {}
-

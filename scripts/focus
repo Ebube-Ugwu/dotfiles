@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [[ -z $1 ]]; then
+  echo "Enter a program window name"
+  exit 0
+fi
+
+program=$1
+wmctrl -lx | grep -i $program | awk '{print $5}' | xargs -I{} wmctrl -a {}
+
