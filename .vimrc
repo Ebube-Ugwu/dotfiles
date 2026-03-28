@@ -145,6 +145,7 @@ set cinoptions+=:0
 " --------------------------------
 " Edit/Reload vimrc configuration file
 nnoremap <Leader>ev :e ~/.vimrc<CR>
+nnoremap <Leader>ej :e ~/.ideavimrc<CR>
 nnoremap <Leader>sv :source ~/.vimrc<CR>
 
 " Open todofile
