@@ -148,6 +148,9 @@ nnoremap <Leader>ev :e ~/.vimrc<CR>
 nnoremap <Leader>ej :e ~/.ideavimrc<CR>
 nnoremap <Leader>sv :source ~/.vimrc<CR>
 
+" Uppercase
+nnoremap <Leader>u gUiw
+
 " Open todofile
 nnoremap <Leader>td :e ~/TODO.md<CR>
 
