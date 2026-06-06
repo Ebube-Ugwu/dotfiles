@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
 
-session=$(tmuxinator list | perl -p -e 's/ +/\n/g' | perl -pe '$_ = "$.  $_"' | fzf | awk '{ print $2 }')
+session=$(sesh list  | fzf)
+# Old buggy way:
+# kitty --directory "$1" tmuxinator start my_project &
+
+# The Fix: Add a minor sleep inside an explicit execution string
 tmuxinator start $session

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+sesh connect $(sesh list "$1" | fzf)
+

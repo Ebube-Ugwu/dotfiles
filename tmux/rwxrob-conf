@@ -18,8 +18,18 @@ bind -T copy-mode-vi Enter send-keys -X copy-selection-and-cancel \; save-buffer
 # reload configuration
 bind -r r source-file ~/.tmux.conf \; display "Config reloaded"
 
+# Force tmux to open the popup with an interactive shell wrapper
+bind S display-popup -E -w 80% -h 80% "bash -c '~/bin/sesh-tv '"
+# Display tmux sessions only
+bind s display-popup -E -w 80% -h 80% "env LANG=en_US.UTF_8 bash -c '~/bin/sesh-tv -t'"
+# Add the 'LANG' override to guarantee UTF-8 encoding inside the popup window
+
 # add double-tap meta key to toggle last window
 bind-key C-a last-window
+
+# Forces tmux to use a modern, wider character-width table for complex icons
+set -g utf8-default on
+set -g extended-keys on
 
 # use a different prefix for nested
 bind-key -n C-y send-prefix
