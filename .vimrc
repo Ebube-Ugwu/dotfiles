@@ -32,6 +32,8 @@ set clipboard=unnamedplus
 " relative line numbers
 set relativenumber
 
+set timeoutlen=1000
+
 " turn col and row position on in bottom right
 set ruler " see ruf for formatting
 
@@ -159,11 +161,16 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 
 " open nerdtree
-nnoremap <leader>E :NERDTree<cr>
+nnoremap <leader>t :NERDTree<cr>
 
 " Cycle through buffers
 nnoremap <tab> :bn<cr>
 nnoremap <S-Tab> :bp<cr>
+
+" split screen
+nnoremap <leader>v :vsplit<cr>
+nnoremap <leader>s :split<cr>
+
 
 set ruf=%30(%=%#LineNr#%.50F\ [%{strlen(&ft)?&ft:'none'}]\ %l:%c\ %p%%%)
 

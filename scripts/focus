@@ -1,10 +1,32 @@
+# Old version
+##!/usr/bin/env bash
+
+#if [[ -z $1 ]]; then
+#  echo "Enter a program window name"
+#  exit 0
+#fi
+
+#program=$1
+#wmctrl -lx | grep -i $program | awk '{print $5}' | xargs -I{} wmctrl -a {}
+
 #!/usr/bin/env bash
 
 if [[ -z $1 ]]; then
-  echo "Enter a program window name"
-  exit 0
+  echo "Usage: $0 <window-class-name>"
+  exit 1
 fi
 
 program=$1
-wmctrl -lx | grep -i $program | awk '{print $5}' | xargs -I{} wmctrl -a {}
 
+# 1. Use awk to scan column 3 (WM_CLASS) for exact or partial application matches
+# 2. Extract the Window ID (column 1) to pass cleanly to wmctrl
+window_id=$(wmctrl -lx | awk -v prog="$program" '
+    tolower($3) ~ tolower(prog) { print $1; exit }
+')
+
+if [[ -n "$window_id" ]]; then
+  wmctrl -i -a "$window_id"
+else
+  echo "No application matching '$program' found running in WM_CLASS."
+  exit 1
+fi
