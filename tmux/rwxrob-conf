@@ -1,6 +1,3 @@
-# Configured by Rob Muhlestein (linktr.ee/rwxrob)
-# This file is copyright free (public domain).
-
 # change default meta key to same as screen
 unbind C-b
 unbind C-a
@@ -9,6 +6,10 @@ set -g prefix C-a
 # turn pane sync on/off
 bind -r y setw synchronize-panes
 
+# Press Prefix + I to preview and view high-res images inside the pane using Kitty icat
+bind o run-shell "tmux split-window -h -p 40 'file=\$(find . -maxdepth 10 -type f \\( -name \"*.png\" -o -name \"*.jpg\" -o -name \"*.jpeg\" -o -name \"*.webp\" -o -name \"*.gif\" \\) 2>/dev/null | fzf --prompt=\"Images > \" --preview=\"kitten icat --transfer-mode=file --clear --place=\${FZF_PREVIEW_COLUMNS}x\${FZF_PREVIEW_LINES}@0x0 {}\") && [ -n \"\$file\" ] && clear && kitten icat --place 40x20@0x0 --align=center \"\$file\" && read -n 1'"
+
+# kitty +kitten icat --place 40x20@0x0 /path/to/image.jpg
 # override Enter in copy-mode to write selected text /tmp/buf for yyy/ppp
 unbind -T copy-mode Enter
 unbind -T copy-mode-vi Enter
@@ -27,9 +28,8 @@ bind s display-popup -E -w 80% -h 80% "env LANG=en_US.UTF_8 bash -c '~/bin/sesh-
 # add double-tap meta key to toggle last window
 bind-key C-a last-window
 
-# Forces tmux to use a modern, wider character-width table for complex icons
-set -g utf8-default on
-set -g extended-keys on
+# Press Prefix + M to open the Markdown watcher split
+bind M run-shell "tmux split-window -h -p 40 'file=\$(find . -maxdepth 2 -type f -name \"*.md\" 2>/dev/null | fzf --prompt=\"Watch Markdown > \") && [ -n \"\$file\" ] && watch -c mdless \"\$file\"'"
 
 # use a different prefix for nested
 bind-key -n C-y send-prefix

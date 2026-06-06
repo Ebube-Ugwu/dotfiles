@@ -400,3 +400,9 @@ let g:airline#extensions#tabline#enabled = 1
 
 " vim colorsheme
 colorscheme gruvbox
+
+" Clear the background color for the editor and line numbers
+highlight Normal ctermbg=NONE guibg=NONE
+highlight NonText ctermbg=NONE guibg=NONE
+highlight LineNr ctermbg=NONE guibg=NONE
+highlight SignColumn ctermbg=NONE guibg=NONE
