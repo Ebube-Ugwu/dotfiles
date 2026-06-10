@@ -16,12 +16,21 @@ unbind -T copy-mode-vi Enter
 bind -T copy-mode Enter send-keys -X copy-selection-and-cancel \; save-buffer /tmp/buf
 bind -T copy-mode-vi Enter send-keys -X copy-selection-and-cancel \; save-buffer /tmp/buf
 
+# Open lazygit
+bind g new-window "lazygit"
+
+# Open snippets
+bind S new-window "bash -c 'find ~/snippets -type f | fzf --preview=\"bat --style=numbers --color=always {}\" | xargs vim'"
+
+# Open yazi
+bind y new-window "yazi"
+
 # reload configuration
 bind -r r source-file ~/.tmux.conf \; display "Config reloaded"
 
-# Force tmux to open the popup with an interactive shell wrapper
-bind S display-popup -E -w 80% -h 80% "bash -c '~/bin/sesh-tv '"
-# Display tmux sessions only
+# Display all sessions
+bind a display-popup -E -w 80% -h 80% "bash -c '~/bin/sesh-tv '"
+# Display active tmux sessions only
 bind s display-popup -E -w 80% -h 80% "env LANG=en_US.UTF_8 bash -c '~/bin/sesh-tv -t'"
 # Add the 'LANG' override to guarantee UTF-8 encoding inside the popup window
 
@@ -31,6 +40,12 @@ bind-key C-a last-window
 # Press Prefix + M to open the Markdown watcher split
 bind M run-shell "tmux split-window -h -p 40 'file=\$(find . -maxdepth 2 -type f -name \"*.md\" 2>/dev/null | fzf --prompt=\"Watch Markdown > \") && [ -n \"\$file\" ] && watch -c mdless \"\$file\"'"
 
+# Prevent tmux from automatically renaming windows based on the active command
+set-option -g allow-rename off
+
+# Select ai and db windows
+bind m attach-session -t "main"
+bind t select-window -t "test"
 # use a different prefix for nested
 bind-key -n C-y send-prefix
 
@@ -220,7 +235,10 @@ set-window-option -g window-status-format "\
 setw -g history-limit 50000000
 
 # Allow passthrough 
-set -gq allow-passthrough on
+set -g allow-passthrough on
+# Inform applications that Tmux supports image rendering extensions
+set -ga update-environment TERM
+set -ga update-environment TERM_PROGRAM
 
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
