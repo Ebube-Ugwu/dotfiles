@@ -5,7 +5,9 @@ commitdot || echo -e "\e[31m \n commit failed..\n check network connection \e[37
 echo -e "\e[33m ENDED commiting dotfiles\e[37m"
 echo -e "\n"
 
+echo -e "\e[33m BEGIN commiting snippets\e[37m"
 cd ~/snippets && gacp update snippets
+echo -e "\e[33m END commiting snippets\e[37m"
 
 echo -e "\e[33m BEGIN commiting notes\e[37m"
 notes push || echo -e "\e[31m \n commit failed..\n check network connection \e[37m"
