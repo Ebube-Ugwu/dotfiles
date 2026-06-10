@@ -6,7 +6,7 @@ echo -e "\e[33m ENDED commiting dotfiles\e[37m"
 echo -e "\n"
 
 echo -e "\e[33m BEGIN commiting snippets\e[37m"
-cd ~/snippets && gacp update snippets
+cd ~/snippets && git add -A && git commit -m "update snippets" && git push
 echo -e "\e[33m END commiting snippets\e[37m"
 
 echo -e "\e[33m BEGIN commiting notes\e[37m"
