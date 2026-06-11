@@ -9,6 +9,10 @@ echo -e "\e[33m BEGIN commiting snippets\e[37m"
 cd ~/snippets && git add -A && git commit -m "update snippets" && git push
 echo -e "\e[33m END commiting snippets\e[37m"
 
+echo -e "\e[33m BEGIN commiting conf\e[37m"
+cd ~/personal && dconf dump setting.conf && git add -A && git commit -m "update conf" && git push
+echo -e "\e[33m END commiting conf\e[37m"
+
 echo -e "\e[33m BEGIN commiting notes\e[37m"
 notes push || echo -e "\e[31m \n commit failed..\n check network connection \e[37m"
 echo -e "\e[33m END commiting notes\e[37m"
