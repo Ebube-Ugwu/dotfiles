@@ -7,7 +7,7 @@ set -g prefix C-a
 bind -r y setw synchronize-panes
 
 # Press Prefix + I to preview and view high-res images inside the pane using Kitty icat
-bind o run-shell "tmux split-window -h -p 40 'file=\$(find . -maxdepth 10 -type f \\( -name \"*.png\" -o -name \"*.jpg\" -o -name \"*.jpeg\" -o -name \"*.webp\" -o -name \"*.gif\" \\) 2>/dev/null | fzf --prompt=\"Images > \" --preview=\"kitten icat --transfer-mode=file --clear --place=\${FZF_PREVIEW_COLUMNS}x\${FZF_PREVIEW_LINES}@0x0 {}\") && [ -n \"\$file\" ] && clear && kitten icat --place 40x20@0x0 --align=center \"\$file\" && read -n 1'"
+bind o run-shell "tmux split-window -h -p 25 'file=\$(find . -maxdepth 10 -type f \\( -name \"*.png\" -o -name \"*.jpg\" -o -name \"*.jpeg\" -o -name \"*.webp\" -o -name \"*.gif\" \\) 2>/dev/null | fzf --prompt=\"Images > \" --preview=\"kitten icat --transfer-mode=file --clear --place=\${FZF_PREVIEW_COLUMNS}x\${FZF_PREVIEW_LINES}@0x0 {}\") && [ -n \"\$file\" ] && clear && kitten icat --place 40x20@0x0 --align=center \"\$file\" && read -n 1'"
 
 # kitty +kitten icat --place 40x20@0x0 /path/to/image.jpg
 # override Enter in copy-mode to write selected text /tmp/buf for yyy/ppp
@@ -16,14 +16,14 @@ unbind -T copy-mode-vi Enter
 bind -T copy-mode Enter send-keys -X copy-selection-and-cancel \; save-buffer /tmp/buf
 bind -T copy-mode-vi Enter send-keys -X copy-selection-and-cancel \; save-buffer /tmp/buf
 
-# Open lazygit
-bind g new-window "lazygit"
-
 # Open snippets
 bind S new-window "bash -c 'find ~/snippets -type f | fzf --preview=\"bat --style=numbers --color=always {}\" | xargs vim'"
 
+# Lazygit
+bind g new-window "lazygit"
+
 # Open yazi
-bind y new-window "yazi"
+bind E new-window "yazi"
 
 # reload configuration
 bind -r r source-file ~/.tmux.conf \; display "Config reloaded"
@@ -261,3 +261,6 @@ set -g @plugin 'tmux-plugins/tmux-resurrect'
     # prefix + Ctrl-s - save
     # prefix + Ctrl-r - restore
 # set -g @plugin 'erikw/tmux-powerline'
+
+
+set -g @plugin 'tmux-plugins/tmux-yank'
